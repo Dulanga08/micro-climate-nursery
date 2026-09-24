@@ -1,0 +1,77 @@
+{
+  "version": 1,
+  "author": "Dulanga Basnayake",
+  "editor": "wokwi",
+  "parts": [
+    { "type": "board-esp32-devkit-c-v4", "id": "esp", "top": 0, "left": 0, "attrs": {} },
+    { "type": "board-ssd1306", "id": "oled", "top": -160, "left": 140, "attrs": {} },
+    { "type": "wokwi-dht22", "id": "dht", "top": -160, "left": -220, "attrs": {} },
+    { "type": "wokwi-servo", "id": "servo", "top": -20, "left": 220, "attrs": {} },
+    { "type": "wokwi-photoresistor-sensor", "id": "ldr", "top": -30, "left": -220, "attrs": {} },
+
+    { "type": "wokwi-pushbutton", "id": "btn_ovr", "top": 140, "left": -220, "attrs": { "color": "green", "label": "Override" } },
+    { "type": "wokwi-pushbutton", "id": "btn_disp", "top": 210, "left": -220, "attrs": { "color": "blue", "label": "Display" } },
+
+    { "type": "wokwi-led", "id": "led_pwr", "top": 240, "left": -20, "attrs": { "color": "red", "label": "PWR" } },
+    { "type": "wokwi-led", "id": "led_norm", "top": 240, "left": 30, "attrs": { "color": "green", "label": "NORM" } },
+    { "type": "wokwi-led", "id": "led_temp", "top": 240, "left": 80, "attrs": { "color": "red", "label": "TEMP" } },
+    { "type": "wokwi-led", "id": "led_vent", "top": 240, "left": 130, "attrs": { "color": "blue", "label": "VENT" } },
+    { "type": "wokwi-led", "id": "led_light", "top": 240, "left": 180, "attrs": { "color": "yellow", "label": "GROW" } },
+    { "type": "wokwi-led", "id": "led_hum", "top": 240, "left": 230, "attrs": { "color": "orange", "label": "HUM" } },
+
+    { "type": "wokwi-resistor", "id": "r_pwr", "top": 280, "left": -20, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r_norm", "top": 280, "left": 30, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r_temp", "top": 280, "left": 80, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r_vent", "top": 280, "left": 130, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r_light", "top": 280, "left": 180, "rotate": 90, "attrs": { "value": "220" } },
+    { "type": "wokwi-resistor", "id": "r_hum", "top": 280, "left": 230, "rotate": 90, "attrs": { "value": "220" } }
+  ],
+  "connections": [
+    [ "esp:3V3", "oled:VCC", "red", [ "v0" ] ],
+    [ "esp:GND.2", "oled:GND", "black", [ "v0" ] ],
+    [ "esp:21", "oled:SDA", "blue", [ "v0" ] ],
+    [ "esp:22", "oled:SCL", "yellow", [ "v0" ] ],
+
+    [ "esp:3V3", "dht:VCC", "red", [ "v0" ] ],
+    [ "esp:GND.1", "dht:GND", "black", [ "v0" ] ],
+    [ "esp:27", "dht:SDA", "green", [ "v0" ] ],
+
+    [ "esp:5V", "servo:V+", "red", [ "v0" ] ],
+    [ "esp:GND.1", "servo:GND", "black", [ "v0" ] ],
+    [ "esp:13", "servo:PWM", "orange", [ "v0" ] ],
+
+    [ "esp:3V3", "ldr:VCC", "red", [ "v0" ] ],
+    [ "esp:GND.1", "ldr:GND", "black", [ "v0" ] ],
+    [ "esp:34", "ldr:AO", "purple", [ "v0" ] ],
+
+    [ "esp:GND.1", "btn_ovr:1.l", "black", [ "v0" ] ],
+    [ "esp:25", "btn_ovr:2.l", "gray", [ "v0" ] ],
+
+    [ "esp:GND.1", "btn_disp:1.l", "black", [ "v0" ] ],
+    [ "esp:26", "btn_disp:2.l", "white", [ "v0" ] ],
+
+    [ "esp:18", "led_pwr:A", "red", [ "v0" ] ],
+    [ "led_pwr:C", "r_pwr:1", "black", [ "v0" ] ],
+    [ "r_pwr:2", "esp:GND.3", "black", [ "v0" ] ],
+
+    [ "esp:33", "led_norm:A", "green", [ "v0" ] ],
+    [ "led_norm:C", "r_norm:1", "black", [ "v0" ] ],
+    [ "r_norm:2", "esp:GND.3", "black", [ "v0" ] ],
+
+    [ "esp:32", "led_temp:A", "red", [ "v0" ] ],
+    [ "led_temp:C", "r_temp:1", "black", [ "v0" ] ],
+    [ "r_temp:2", "esp:GND.3", "black", [ "v0" ] ],
+
+    [ "esp:19", "led_vent:A", "blue", [ "v0" ] ],
+    [ "led_vent:C", "r_vent:1", "black", [ "v0" ] ],
+    [ "r_vent:2", "esp:GND.3", "black", [ "v0" ] ],
+
+    [ "esp:4", "led_light:A", "yellow", [ "v0" ] ],
+    [ "led_light:C", "r_light:1", "black", [ "v0" ] ],
+    [ "r_light:2", "esp:GND.3", "black", [ "v0" ] ],
+
+    [ "esp:17", "led_hum:A", "orange", [ "v0" ] ],
+    [ "led_hum:C", "r_hum:1", "black", [ "v0" ] ],
+    [ "r_hum:2", "esp:GND.3", "black", [ "v0" ] ]
+  ]
+}
